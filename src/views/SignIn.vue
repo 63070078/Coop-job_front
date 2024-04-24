@@ -159,6 +159,7 @@ export default {
           email: this.recruiterEmail,
           password: this.recruiterPassword,
         };
+        console.log(data)
         axios
           .post(`${backendUrl}/user/signin`, data)
           .then((res) => {

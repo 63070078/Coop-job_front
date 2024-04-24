@@ -104,7 +104,7 @@
 import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 import axios from "@/plugins/axios";
 import Swal from "sweetalert2";
-
+const backendUrl = "https://coop-job-back.onrender.com";
 function complexPassword(value) {
   if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
     return false;
@@ -172,7 +172,7 @@ export default {
         };
 
         axios
-          .post("http://localhost:3000/applicant/signup", data)
+          .post(`${backendUrl}/applicant/signup`, data)
           .then((res) => {
             console.log(res);
             Swal.fire({
@@ -203,7 +203,7 @@ export default {
           confirm_password: this.recruiterConfirmPassword
         };
         axios
-          .post("http://localhost:3000/recruiter/signup", data)
+          .post(`${backendUrl}/recruiter/signup`, data)
           .then((res) => {
             console.log(res);
             Swal.fire({

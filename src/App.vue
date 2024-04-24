@@ -21,7 +21,6 @@
                 </div>
               </div>
 
-
               <!-- ของบริษัท -->
               <router-link class="navbar-item " to="/recruiterProfile" v-if="user.role === 'recruiter'">
                 <font-awesome-icon icon="exclamation" style="color: red" v-if="recruiter.status === 'close'" />ข้อมูลบริษัท
@@ -34,7 +33,6 @@
                 <span>ตั้งค่าบัญชีผู้ใช้</span>
               </router-link>
               
-
               <!-- ของคนหางาน -->
               <router-link class="navbar-item " to="/" v-if="user.role === 'applicant'">
                 หางาน
@@ -51,9 +49,8 @@
               </router-link>
 
               <router-link class="navbar-item " to="/adminOverview" v-if="user.role === 'admin'">
-                     
-                      <span>dashboard</span>
-                    </router-link>
+                <span>dashboard</span>
+              </router-link>
               
               <div class="navbar-item">
                 <div class="buttons">
@@ -63,7 +60,7 @@
                 </div>
               </div>
             </div>
-          
+    
     </div>
   </div>
 </nav>
@@ -77,7 +74,7 @@
 <script>
 import axios from "@/plugins/axios";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     FontAwesomeIcon
@@ -108,7 +105,7 @@ export default {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get("http://localhost:3000/user/me", config).then((res) => {
+      axios.get(`${backendUrl}/user/me`, config).then((res) => {
         
         this.user = res.data;
         console.log("App.vue", this.user)

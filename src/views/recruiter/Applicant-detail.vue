@@ -101,7 +101,7 @@
               <article class="download-instructions">
                 <h2>1.ดาวน์โหลดแบบตอบรับและเสนองานนักศึกษาสหกิจศึกษา</h2>
                   <div class="file has-name">
-                  <label class="file-label" @click="downloadFile(`${backendUrl}/static/coop302/coop302.pdf`)">               
+                  <label class="file-label" @click="downloadFile(`https://coop-job-back.onrender.com/coop302/coop302.pdf`)">               
                     <span class="file-cta">
                       <span class="file-icon">
                         <i class="fa-sharp fa-solid fa-download"></i>

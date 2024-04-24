@@ -132,7 +132,7 @@
 
 <script>
 import axios from "axios";
- const backendUrl = "https://coop-job-back.onrender.com"
+import instance from "@/plugins/axios";
 export default {
   data() {
     return {
@@ -174,7 +174,7 @@ methods: {
     getCompanies() {
      
       axios
-        .get(`${backendUrl}/recruiter/getRecruiter`)
+        .get(`${instance}/recruiter/getRecruiter`)
         .then((response) => {
           this.companies = response.data;
         })
@@ -192,7 +192,7 @@ methods: {
     };
 
     axios
-      .get(`${backendUrl}/recruiter/getAllJobs`, config)
+      .get(`${instance}/recruiter/getAllJobs`, config)
       .then((res) => {
         // เพิ่มข้อมูลบริษัทลงในข้อมูลงาน
         this.jobs = res.data.map(job => {
@@ -208,7 +208,7 @@ methods: {
   },
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${instance}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

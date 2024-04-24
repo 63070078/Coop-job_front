@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: 'https://coopjob-backend-2nu3pqzog-63070078s-projects.vercel.app/',
 })
 
 export default instance

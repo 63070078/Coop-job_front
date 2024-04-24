@@ -132,7 +132,7 @@
 
 <script>
 import axios from "axios";
-
+const backendUrl = process.env.VUE_APP_BACKEND_URL;
 export default {
   data() {
     return {
@@ -172,8 +172,9 @@ export default {
   },
 methods: {
     getCompanies() {
+     
       axios
-        .get("https://coop-job-back.onrender.com/recruiter/getRecruiter")
+        .get(`${backendUrl}/recruiter/getRecruiter`)
         .then((response) => {
           this.companies = response.data;
         })

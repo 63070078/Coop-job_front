@@ -17,6 +17,7 @@
 <script>
 import VueApexCharts from 'vue-apexcharts';
 import axios from 'axios';
+const backendUrl = "https://coop-job-back.onrender.com";
 
 export default {
   components: {
@@ -54,7 +55,7 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('http://localhost:3000/admin/BenefitList')
+      axios.get(`${backendUrl}/admin/BenefitList`)
         .then(response => {
           this.originalData = response.data;
           this.years = [...new Set(this.originalData.map(item => new Date(item.created_at).getFullYear()))];

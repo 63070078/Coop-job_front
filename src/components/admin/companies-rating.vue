@@ -160,7 +160,9 @@
 import axios from "axios";
 //import Swal from "sweetalert2";
 import Papa from 'papaparse';
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx';
+const backendUrl = "https://coop-job-back.onrender.com";
+
 export default {
 data() {
 
@@ -262,7 +264,7 @@ methods: {
       },
     };
      axios
-      .get("http://localhost:3000/admin/companyReview", config)
+      .get(`${backendUrl}/admin/companyReview`, config)
       .then((response) => {
         this.companyLists = response.data;
       })
@@ -276,7 +278,7 @@ methods: {
   },
   imagePath(companyProfileImage) {
     if (companyProfileImage) {
-      return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+      return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
     } else {
       return "https://bulma.io/images/placeholders/640x360.png";
     }

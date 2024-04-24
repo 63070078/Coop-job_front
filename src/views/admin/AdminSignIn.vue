@@ -38,6 +38,7 @@
 import { required, email, minLength } from "vuelidate/lib/validators";
 import axios from "@/plugins/axios";
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 function complexPassword(value) {
   if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
     return false;
@@ -83,7 +84,7 @@ export default {
           password: this.adminPassword,
         };
         axios
-          .post("http://localhost:3000/user/signin", data)
+          .post(`${backendUrl}/user/signin`, data)
           .then((res) => {
             const token = res.data.token;
             localStorage.setItem("token", token);

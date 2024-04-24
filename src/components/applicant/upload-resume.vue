@@ -51,9 +51,10 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
+import axios from "axios";
 import noInformation from "@/components/no-information.vue";
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     noInformation
@@ -84,7 +85,7 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     }; 
-    axios.get("http://localhost:3000/applicant/getData", config).then((res) => {
+    axios.get(`${backendUrl}/applicant/getData`, config).then((res) => {
       const user = res.data;
       //console.log("getappProfile",user[0].resume)
      if(user[0].resume){
@@ -97,7 +98,7 @@ export default {
   },
   imagePath(previewCurrentResume) {
       if (previewCurrentResume) {
-        return "http://localhost:3000/" + previewCurrentResume;
+        return `${backendUrl}/` + previewCurrentResume;
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -140,7 +141,7 @@ export default {
       const formData = new FormData();
       formData.append("student_status", 'open');
       formData.append("resume", file);
-      axios.post("http://localhost:3000/applicant/uploadResume", formData, config)
+      axios.post(`${backendUrl}/applicant/uploadResume`, formData, config)
         .then((response) => {
           if(response.data.filePath) {
             this.previewCurrentResume = response.data.filePath.replace(/\\/g, '/').replace('static', '');

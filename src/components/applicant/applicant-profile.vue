@@ -191,11 +191,12 @@ import {
   minLength,
   maxLength,
 } from "vuelidate/lib/validators";
-import axios from "@/plugins/axios";
+import axios from "axios";
 import Swal from "sweetalert2";
 import uploadResume from "./upload-resume.vue";
 import uploadPortfolio from "./upload-portfolio.vue";
 import uploadTranscript from "./upload-transcript.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components:{
     uploadResume,
@@ -234,7 +235,7 @@ export default {
       };
 
       axios
-        .get("http://localhost:3000/applicant/getData", config)
+        .get(`${backendUrl}/applicant/getData`, config)
         .then((res) => {
           const user = res.data;
           // console.log("getappProfile",user)
@@ -275,7 +276,7 @@ export default {
         address: this.address,
       };
       axios
-        .post("http://localhost:3000/applicant/editProfile", data, config)
+        .post(`${backendUrl}/applicant/editProfile`, data, config)
         .then((res) => {
           this.$emit("auth-change");
           console.log(res);

@@ -34,7 +34,7 @@
   
   <script>
   import axios from "axios";
-  
+  const backendUrl = "https://coop-job-back.onrender.com";
   export default {
     data() {
       return {
@@ -52,7 +52,7 @@
   methods: {
       getCompanies() {
         axios
-          .get("http://localhost:3000/recruiter/getRecruiter")
+          .get(`${backendUrl}/recruiter/getRecruiter`)
           .then((response) => {
             this.companies = response.data;
           })
@@ -63,7 +63,7 @@
 
       imagePath(companyProfileImage) {
         if (companyProfileImage) {
-          return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+          return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
         } else {
           return "https://bulma.io/images/placeholders/640x360.png";
         }

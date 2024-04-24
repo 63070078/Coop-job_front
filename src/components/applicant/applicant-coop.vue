@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
-
+import axios from "axios";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   data() {
     return {
@@ -35,7 +35,7 @@ export default {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get("http://localhost:3000/user/me", config)
+      axios.get(`${backendUrl}/user/me`, config)
         .then((res) => {
           this.user = res.data;
           console.log("App.vue", this.user);
@@ -61,7 +61,7 @@ export default {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get(`http://localhost:3000/application/getStudentJobs?job_id=${jobId}`, config)
+      axios.get(`${backendUrl}/application/getStudentJobs?job_id=${jobId}`, config)
         .then((res) => {
           this.studentJobs = res.data;
         })
@@ -72,7 +72,7 @@ export default {
     imagePath(coop302Path) {
       if (coop302Path) {
 
-        return "http://localhost:3000" + coop302Path.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + coop302Path.replace(/\\/g, '/').replace('static', '');
       } else {
 
         return "https://bulma.io/images/placeholders/640x360.png";

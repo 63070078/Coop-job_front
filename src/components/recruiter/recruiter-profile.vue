@@ -232,7 +232,8 @@ import { required,  email } from 'vuelidate/lib/validators';
 import axios from '@/plugins/axios';
 import Swal from 'sweetalert2';
 import Multiselect from 'vue-multiselect';
-import jsonData from '@/assets/api_province_with_amphure_tambon.json'
+import jsonData from '@/assets/api_province_with_amphure_tambon.json';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     Multiselect,
@@ -342,7 +343,7 @@ combineData() {
           'Content-Type': 'multipart/form-data',
         },
       };
-      axios.get('http://localhost:3000/recruiter/getData', config).then((res) => {
+      axios.get('${backendUrl}/recruiter/getData', config).then((res) => {
         const user = res.data; 
         this.contact_person_name = user[0].contact_person_name;
         this.contact_phone_number = user[0].contact_phone_number;
@@ -371,7 +372,7 @@ combineData() {
     },
     imagePath(previewProfileImage) {
       if (previewProfileImage) {
-        return "http://localhost:3000" + previewProfileImage;
+        return `${backendUrl}` + previewProfileImage;
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -379,7 +380,7 @@ combineData() {
 
     CoverimagePath(previewCoverImage) {
       if (previewCoverImage) {
-        return 'http://localhost:3000' + previewCoverImage;
+        return `${backendUrl}` + previewCoverImage;
       } else {
         return 'https://bulma.io/images/placeholders/640x360.png';
       }
@@ -425,7 +426,7 @@ combineData() {
       formData.append('business_type', businessTypeString);
       formData.append('company_video', this.company_video);
       axios
-        .post('http://localhost:3000/recruiter/editProfile', formData, config)
+        .post(`${backendUrl}/recruiter/editProfile`, formData, config)
         .then((response) => {
           console.log('Save successful:', response);
           Swal.fire({

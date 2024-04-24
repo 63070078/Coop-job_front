@@ -117,6 +117,7 @@
 <script>
 import axios from 'axios';
 import sideMenu from '@/components/admin/side-menu.vue';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
     components:{
         sideMenu
@@ -192,7 +193,7 @@ export default {
   methods: {
     fetcReportDetails() {
       const benefitId = this.$route.params.id;
-      axios.get(`http://localhost:3000/admin/BenefitDetail/${benefitId}`)
+      axios.get(`${backendUrl}/admin/BenefitDetail/${benefitId}`)
         .then(response => {
           this.report = response.data;
         })
@@ -229,7 +230,7 @@ export default {
 },
   imagePath(companyProfileImage) {
     if (companyProfileImage) {
-      return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+      return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
     } else {
       return "https://bulma.io/images/placeholders/640x360.png";
     }

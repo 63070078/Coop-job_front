@@ -111,7 +111,9 @@
 import draggable from "vuedraggable";
 import axios from "axios";
 import sideMenu from '@/components/admin/side-menu.vue';
-import * as XLSX from 'xlsx'
+import * as XLSX from 'xlsx';
+const backendUrl = "https://coop-job-back.onrender.com";
+
 export default {
   components: { draggable, sideMenu },
   data() {
@@ -168,7 +170,7 @@ export default {
   methods: {
     fetchCategories() {
       axios
-        .get("http://localhost:3000/admin/getcategories")
+        .get(`${backendUrl}/admin/getcategories`)
         .then((response) => {
           this.categories = response.data;
           this.initCategoryApplications();
@@ -177,7 +179,7 @@ export default {
     },
     fetchApplicationCategories() {
       axios
-        .get("http://localhost:3000/admin/assignedApplicationCategories")
+        .get(`${backendUrl}/admin/assignedApplicationCategories`)
         .then((response) => {
           // ประมวลผลข้อมูลที่ได้รับ
           const applicationsWithCategories = response.data;
@@ -197,7 +199,7 @@ export default {
     },
     fetchApplications() {
       axios
-        .get("http://localhost:3000/admin/unassignedApplications")
+        .get(`${backendUrl}/admin/unassignedApplications`)
         .then((response) => {
           // รีเซ็ต categoryApplications และ กระจาย applications ให้ถูกต้องตามหมวดหมู่
           this.initCategoryApplications();
@@ -239,7 +241,7 @@ export default {
         category_id: categoryId,
       };
 
-      axios.put("http://localhost:3000/admin/updateApplicationCategory", data)
+      axios.put(`${backendUrl}/admin/updateApplicationCategory`, data)
         .then(response => {
           console.log("Category updated successfully:", response.data);
           resolve();
@@ -265,7 +267,7 @@ export default {
           category_id: categoryId,
         };
         console.log("data", data);
-        axios.delete(`http://localhost:3000/admin/removeApplicationCategory?application_id=${applicationId}&category_id=${categoryId}`)
+        axios.delete(`${backendUrl}/admin/removeApplicationCategory?application_id=${applicationId}&category_id=${categoryId}`)
           .then((response) => {
           console.log("Category removed successfully:", response.data);
             // อาจจะต้องมีการอัพเดท state หรือ UI ที่นี่หลังจากลบข้อมูลสำเร็จ

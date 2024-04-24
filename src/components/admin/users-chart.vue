@@ -7,7 +7,7 @@
 <script>
 import VueApexCharts from 'vue-apexcharts'
 import axios from 'axios'
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     apexchart: VueApexCharts,
@@ -65,7 +65,7 @@ export default {
   methods: {
     async loadUserData() {
       try {
-        const response = await axios.get('http://localhost:3000/admin/Allusers');
+        const response = await axios.get(`${backendUrl}/admin/Allusers`);
         this.processUserData(response.data);
       } catch (error) {
         console.error('Error loading user data:', error);

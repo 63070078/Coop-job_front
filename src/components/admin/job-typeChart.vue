@@ -7,7 +7,7 @@
 <script>
 import VueApexCharts from 'vue-apexcharts';
 import axios from 'axios';
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     apexchart: VueApexCharts,
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     fetchData() {
-      axios.get('http://localhost:3000/admin/ApplicationList')
+      axios.get(`${backendUrl}/admin/ApplicationList`)
         .then(response => {
           this.processData(response.data);
         })

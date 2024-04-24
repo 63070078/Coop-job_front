@@ -151,7 +151,7 @@
 <script>
 import axios from "@/plugins/axios";
 import recruiterSideMenu from '@/components/recruiter/recruiter-side-menu.vue';
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     recruiterSideMenu
@@ -189,7 +189,7 @@ getApplicationByJob(jobId) {
         },
       };
       axios
-        .get(`http://localhost:3000/application/getApplicationByJob/${jobId}`, config)
+        .get(`${backendUrl}/application/getApplicationByJob/${jobId}`, config)
         .then((response) => {
           this.applicationsByJob = response.data;
           this.jobName = response.data[0].job_title

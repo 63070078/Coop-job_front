@@ -41,6 +41,7 @@
 <script>
 import axios from "axios";
 import applicantSideMenu from '@/components/applicant/applicant-side-menu.vue';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     applicantSideMenu
@@ -61,7 +62,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/application/getReportHistory", config)
+            axios.get(`${backendUrl}/application/getReportHistory`, config)
                 .then((res) => {
                     this.report_history = res.data;
                 })

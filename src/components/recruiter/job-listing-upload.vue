@@ -43,7 +43,8 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import noInformationVue from "@/components/no-information.vue";
-import applicationEachJob from "@/components/recruiter/application-eachjob.vue"
+import applicationEachJob from "@/components/recruiter/application-eachjob.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     noInformationVue,
@@ -89,7 +90,7 @@ export default {
     },
     imagePath(jobFile) {
       if (jobFile) {
-        return "http://localhost:3000" + jobFile.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + jobFile.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -108,7 +109,7 @@ export default {
       },
     };
       axios
-        .get("http://localhost:3000/recruiter/getJob", config)
+        .get(`${backendUrl}/recruiter/getJob`, config)
         .then((res) => {
           this.jobs = res.data;
         })
@@ -133,7 +134,7 @@ export default {
             },
         };
     axios
-        .delete(`http://localhost:3000/recruiter/deleteJob/${job_id}`, config)
+        .delete(`${backendUrl}/recruiter/deleteJob/${job_id}`, config)
         .then((res) => {
         // ลบงานสำเร็จ อัปเดตรายการงาน
         console.log(res)
@@ -171,7 +172,7 @@ export default {
       },
     };
     const data = { job_status: newStatus };
-    axios.put(`http://localhost:3000/recruiter/updateJobStatus/${job.job_id}`, data, config)
+    axios.put(`${backendUrl}/recruiter/updateJobStatus/${job.job_id}`, data, config)
       .then(response => {
         Swal.fire("อัพเดตสถานะงานสำเร็จ", "", "success");
         console.log('Job status updated successfully', response.data);
@@ -198,7 +199,7 @@ export default {
         },
       };
       axios
-        .get("http://localhost:3000/application/getApplications", config)
+        .get(`${backendUrl}/application/getApplications`, config)
         .then((response) => {
           this.applications = response.data;
           

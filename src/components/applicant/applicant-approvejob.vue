@@ -192,6 +192,7 @@ import { validationMixin } from 'vuelidate';
 import axios from "axios";
 import Swal from "sweetalert2";
 import applicantSideMenu from "./applicant-side-menu.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
     components:{
         applicantSideMenu,
@@ -263,7 +264,7 @@ export default {
         
         imagePath(companyProfileImage) {
             if (companyProfileImage) {
-                return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+                return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
             } else {
                 return "https://bulma.io/images/placeholders/640x360.png";
             }
@@ -293,7 +294,7 @@ export default {
                 },
             };
             axios
-                .get("http://localhost:3000/application/getJobApprovedApplication", config)
+                .get(`${backendUrl}/application/getJobApprovedApplication`, config)
                 .then((response) => {
 
                     this.applications = response.data;
@@ -312,7 +313,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/user/me", config)
+            axios.get(`${backendUrl}/user/me`, config)
                 .then((res) => {
                     this.user = res.data;
                     console.log("App.vue", this.user);
@@ -333,7 +334,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/application/getReportHistory", config)
+            axios.get(`${backendUrl}/application/getReportHistory`, config)
                 .then((res) => {
                     this.report_history = res.data[0];
                 })
@@ -348,7 +349,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/application/getBenefitHistory", config)
+            axios.get(`${backendUrl}/application/getBenefitHistory`, config)
                 .then((res) => {
                     this.benefit_history = res.data[0];
                 })
@@ -363,7 +364,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/application/reviewHistory", config)
+            axios.get(`${backendUrl}/application/reviewHistory`, config)
                 .then((res) => {
                     this.review_history = res.data[0];
                 })
@@ -393,7 +394,7 @@ export default {
                 };
                 //console.log('fronend report job', data)
                 axios   
-                .post("http://localhost:3000/application/submitReport", data, config)
+                .post(`${backendUrl}/application/submitReport`, data, config)
                 .then((res) => {
                     const message = res.data.message;
                     Swal.fire({
@@ -434,7 +435,7 @@ export default {
                 job_id: this.selectedJobId,
                 };
                 axios
-                .post("http://localhost:3000/application/addBenefitReport", data, config)
+                .post(`${backendUrl}/application/addBenefitReport`, data, config)
                 .then((res) => {
                     const message = res.data.message;
                     Swal.fire({
@@ -476,7 +477,7 @@ export default {
                     comment: this.reviewForm.reviewComment
                 };
             axios
-            .post("http://localhost:3000/application/submitReview", data, config)
+            .post(`${backendUrl}/application/submitReview`, data, config)
             .then((res) =>{
                 const message = res.data.message;
                 Swal.fire({

@@ -88,6 +88,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import applicantSideMenu from "./applicant-side-menu.vue";
 import { required} from 'vuelidate/lib/validators';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components:{
     applicantSideMenu
@@ -139,7 +140,7 @@ export default {
   methods: {
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -152,7 +153,7 @@ export default {
         },
       };
       axios
-        .get("http://localhost:3000/application/getJobApplications", config)
+        .get(`${backendUrl}/application/getJobApplications`, config)
         .then((response) => {
           this.applications = response.data;
         })
@@ -168,7 +169,7 @@ export default {
                 },
             };
 
-            axios.get("http://localhost:3000/application/reviewHistory", config)
+            axios.get(`${backendUrl}/application/reviewHistory`, config)
                 .then((res) => {
                     this.review_history = res.data;
                     this.reviewComment = res.data[0].comment;
@@ -218,7 +219,7 @@ export default {
   
             };
             axios
-            .put("http://localhost:3000/application/editReview", data, config)
+            .put(`${backendUrl}/application/editReview`, data, config)
             .then((res) =>{
                 const message = res.data.message;
                 Swal.fire({

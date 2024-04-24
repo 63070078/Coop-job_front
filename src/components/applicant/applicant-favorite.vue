@@ -37,6 +37,7 @@
 import axios from "axios";
 import applicantSideMenu from '@/components/applicant/applicant-side-menu.vue';
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
      applicantSideMenu
@@ -59,7 +60,7 @@ export default {
             Authorization: `Bearer ${token}`,
           },
         };
-        const response = await axios.get("http://localhost:3000/application/getFavoriteJobs", config);
+        const response = await axios.get(`${backendUrl}/application/getFavoriteJobs`, config);
         this.likedJobs = response.data
         //console.log(this.likedJobs);
       } catch (error) {
@@ -68,7 +69,7 @@ export default {
     },
     unfavThisJob(jobId) {
       const token = localStorage.getItem("token");
-      axios.delete(`http://localhost:3000/application/cancelFavoriteJob/${jobId}`, {
+      axios.delete(`${backendUrl}/application/cancelFavoriteJob/${jobId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => {
@@ -82,7 +83,7 @@ export default {
     },
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

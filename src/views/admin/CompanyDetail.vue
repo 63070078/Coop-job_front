@@ -178,6 +178,7 @@
 <script>
 import axios from 'axios';
 import sideMenu from '@/components/admin/side-menu.vue';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
     components:{
         sideMenu
@@ -247,7 +248,7 @@ export default {
   methods: {
     fetchCompanyDetails() {
       const companyId = this.$route.params.id;
-      axios.get(`http://localhost:3000/admin/companyDetail/${companyId}`)
+      axios.get(`${backendUrl}/admin/companyDetail/${companyId}`)
         .then(response => {
           this.company = response.data;
         })
@@ -257,7 +258,7 @@ export default {
     },
     fetchCompanyJob() {
       const companyId = this.$route.params.id;
-      axios.get(`http://localhost:3000/admin/companyJobs/${companyId}`)
+      axios.get(`${backendUrl}/admin/companyJobs/${companyId}`)
         .then(response => {
           this.jobs = response.data;
         })
@@ -294,7 +295,7 @@ export default {
 },
   imagePath(companyProfileImage) {
     if (companyProfileImage) {
-      return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+      return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
     } else {
       return "https://bulma.io/images/placeholders/640x360.png";
     }

@@ -82,7 +82,7 @@ import { required } from 'vuelidate/lib/validators';
 import axios from 'axios';
 import Swal from "sweetalert2";
 import applicantSideMenu from './applicant-side-menu.vue';
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components:{
     applicantSideMenu
@@ -114,7 +114,7 @@ export default {
                     Authorization: `Bearer ${token}`,
                 },
             };
-            axios.get("http://localhost:3000/application/getBenefitHistory", config)
+            axios.get(`${backendUrl}/application/getBenefitHistory`, config)
                 .then((res) => {
                     this.benefit_history = res.data[0];
                     this.company_name = res.data[0].company_name
@@ -145,7 +145,7 @@ export default {
       benefit_id: this.benefit_id
     };
 
-    axios.put("http://localhost:3000/application/updateBenefit", benefitData, config)
+    axios.put(`${backendUrl}/application/updateBenefit`, benefitData, config)
       .then(response => {
         Swal.fire({
           icon: 'success',

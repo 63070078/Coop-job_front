@@ -51,9 +51,10 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
+import axios from "axios";
 import noInformation from "@/components/no-information.vue";
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     noInformation
@@ -84,7 +85,7 @@ export default {
         Authorization: `Bearer ${token}`,
       },
     }; 
-    axios.get("http://localhost:3000/applicant/getData", config).then((res) => {
+    axios.get(`${backendUrl}/applicant/getData`, config).then((res) => {
       const user = res.data;
       //console.log("getappProfile",user[0].portfolio)
      if(user[0].portfolio){
@@ -97,7 +98,7 @@ export default {
   },
   imagePath(previewCurrentPortfolio) {
       if (previewCurrentPortfolio) {
-        return "http://localhost:3000/" + previewCurrentPortfolio;
+        return `${backendUrl}/` + previewCurrentPortfolio;
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -140,7 +141,7 @@ export default {
       const formData = new FormData();
       formData.append("student_status", 'open');
       formData.append("portfolio", file);
-      axios.post("http://localhost:3000/applicant/uploadPortfolio", formData, config)
+      axios.post(`${backendUrl}/applicant/uploadPortfolio`, formData, config)
         .then((response) => {
           if(response.data.filePath) {
             this.previewCurrentPortfolio = response.data.filePath.replace(/\\/g, '/').replace('static', '');

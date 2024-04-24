@@ -192,7 +192,7 @@ methods: {
     };
 
     axios
-      .get("https://coop-job-back.onrender.com/recruiter/getAllJobs", config)
+      .get(`${backendUrl}/recruiter/getAllJobs`, config)
       .then((res) => {
         // เพิ่มข้อมูลบริษัทลงในข้อมูลงาน
         this.jobs = res.data.map(job => {
@@ -208,7 +208,7 @@ methods: {
   },
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

@@ -132,7 +132,7 @@
 
 <script>
 import axios from "axios";
-const backendUrl = process.env.VUE_APP_BACKEND_URL;
+ const backendUrl = "https://coop-job-back.onrender.com"
 export default {
   data() {
     return {

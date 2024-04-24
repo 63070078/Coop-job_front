@@ -78,7 +78,7 @@
 
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
-import axios from "@/plugins/axios";
+import axios from "axios";
 import Swal from "sweetalert2";
 const backendUrl = "https://coop-job-back.onrender.com";
 function complexPassword(value) {

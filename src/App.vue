@@ -72,7 +72,7 @@
   </div>
 </template>
 <script>
-import axios from "@/plugins/axios";
+import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 const backendUrl = "https://coop-job-back.onrender.com";
 export default {

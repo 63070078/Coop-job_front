@@ -150,7 +150,7 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
+import axios from "axios";
 import Swal from "sweetalert2";
 const backendUrl = "https://coop-job-back.onrender.com";
 export default {

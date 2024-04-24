@@ -154,7 +154,6 @@ export default {
       });
   
 },
-
     signinRecruiter() {
         const data = {
           email: this.recruiterEmail,

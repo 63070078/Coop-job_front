@@ -317,6 +317,7 @@ import userChart from "@/components/admin/users-chart.vue";
 import jobTypeChart from "@/components/admin/job-typeChart.vue";
 import applicationChart from "@/components/admin/application-chart.vue";
 import jobStatusChart from "@/components/admin/job-statusChart.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 
 export default {
   name: "OverView",
@@ -394,7 +395,7 @@ export default {
   methods: {
     getUsers(){
       axios
-        .get("http://localhost:3000/admin/Allusers")
+        .get(`${backendUrl}/admin/Allusers`)
         .then((response) => {
           this.userLists = response.data;
         })
@@ -404,7 +405,7 @@ export default {
     },
     getReportList() {
       axios
-        .get("http://localhost:3000/admin/ReportList")
+        .get(`${backendUrl}/admin/ReportList`)
         .then((response) => {
           this.reportLists = response.data;
           console.log(this.reportLists);
@@ -415,7 +416,7 @@ export default {
     },
     getApproveApplicationList(){
       axios
-        .get("http://localhost:3000/admin/ApproveApplicationList")
+        .get(`${backendUrl}/admin/ApproveApplicationList`)
         .then((response) => {
           this.applications = response.data;
         })
@@ -425,7 +426,7 @@ export default {
     },
     getJobLists(){
       axios
-        .get("http://localhost:3000/admin/getAllJobs")
+        .get(`${backendUrl}/admin/getAllJobs`)
         .then((response) => {
           this.jobLists = response.data;
         })
@@ -435,7 +436,7 @@ export default {
     },
     getCompanyLists(){
       axios
-        .get("http://localhost:3000/admin/companyList")
+        .get(`${backendUrl}/admin/companyList`)
         .then((response) => {
           this.companyLists = response.data;
         })
@@ -448,7 +449,7 @@ export default {
     },
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

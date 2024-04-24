@@ -78,6 +78,7 @@
 import axios from "axios";
 //import { required, minValue } from 'vuelidate/lib/validators';
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 //import Multiselect from 'vue-multiselect'
 //import JobtypeJson from '@/assets/jobtype.json'
 export default {
@@ -108,7 +109,7 @@ export default {
       };
       const jobId = this.$route.params.jobId;
       axios
-        .get(`http://localhost:3000/recruiter/getJobDetails/${jobId}`, config)
+        .get(`${backendUrl}/recruiter/getJobDetails/${jobId}`, config)
         .then((res) => {
           this.jobs = res.data;
         })
@@ -144,7 +145,7 @@ export default {
     },
     imagePath(jobFile) {
       if (jobFile) {
-        return "http://localhost:3000" + jobFile.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + jobFile.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -170,7 +171,7 @@ export default {
   };
 
   const jobId = this.$route.params.jobId;
-  axios.put(`http://localhost:3000/recruiter/updateUploadJob/${jobId}`, formData, config)
+  axios.put(`${backendUrl}/recruiter/updateUploadJob/${jobId}`, formData, config)
     .then(response => {
       console.log(response)
       // การจัดการหลังจากอัพเดตสำเร็จ
@@ -187,8 +188,6 @@ export default {
       console.log(error);
     });
 },
-
-
     cancel(){
         this.getJobDetails()
         this.$router.push('/recruiterJob');

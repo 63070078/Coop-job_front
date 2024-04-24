@@ -169,6 +169,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import applicantSideMenu from '@/components/applicant/applicant-side-menu.vue';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
 components:{
   applicantSideMenu
@@ -237,7 +238,7 @@ mounted() {
 methods: {
   imagePath(companyProfileImage) {
     if (companyProfileImage) {
-      return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+      return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
     } else {
       return "https://bulma.io/images/placeholders/640x360.png";
     }
@@ -250,7 +251,7 @@ methods: {
       },
     };
     axios
-      .get("http://localhost:3000/application/getJobApplications", config)
+      .get(`${backendUrl}/application/getJobApplications`, config)
       .then((response) => {
         this.applications = response.data;
       })
@@ -267,7 +268,7 @@ methods: {
     };
     const application_status = 'canceled'
     axios
-      .put(`http://localhost:3000/application/cancelJob/${applicationId}`, { application_status },
+      .put(`${backendUrl}/application/cancelJob/${applicationId}`, { application_status },
 
         config
       )

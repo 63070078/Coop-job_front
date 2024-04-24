@@ -159,8 +159,9 @@ import { required, minValue } from 'vuelidate/lib/validators';
 import { validationMixin } from 'vuelidate';
 import axios from 'axios';
 import Swal from "sweetalert2";
-import Multiselect from 'vue-multiselect'
-import JobtypeJson from '@/assets/jobtype.json'
+import Multiselect from 'vue-multiselect';
+import JobtypeJson from '@/assets/jobtype.json';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     Multiselect,
@@ -222,7 +223,7 @@ export default {
       }
 
       axios
-        .post("http://localhost:3000/recruiter/addJob", data, config)
+        .post(`${backendUrl}/recruiter/addJob`, data, config)
         .then((res) =>{
           const message = res.data.message;
             Swal.fire({

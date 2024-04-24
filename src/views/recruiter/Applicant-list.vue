@@ -153,6 +153,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import recruiterSideMenu from "@/components/recruiter/recruiter-side-menu.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     recruiterSideMenu,
@@ -184,7 +185,7 @@ export default {
         },
       };
       axios
-        .get("http://localhost:3000/application/getApplications", config)
+        .get(`${backendUrl}/application/getApplications`, config)
         .then((response) => {
           this.applications = response.data;
           this.isLoading = false;
@@ -207,7 +208,7 @@ export default {
       const status = "reject";
       axios
         .put(
-          `http://localhost:3000/application/updateStatus/${applicationJob}`,
+          `${backendUrl}/application/updateStatus/${applicationJob}`,
           { status },
           config
         )

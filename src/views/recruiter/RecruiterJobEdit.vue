@@ -157,8 +157,9 @@
 import axios from "axios";
 //import { required, minValue } from 'vuelidate/lib/validators';
 import Swal from "sweetalert2";
-import Multiselect from 'vue-multiselect'
-import JobtypeJson from '@/assets/jobtype.json'
+import Multiselect from 'vue-multiselect';
+import JobtypeJson from '@/assets/jobtype.json';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     Multiselect,
@@ -199,7 +200,7 @@ export default {
       };
       const jobId = this.$route.params.jobId;
       axios
-        .get(`http://localhost:3000/recruiter/getJobDetail/${jobId}`, config)
+        .get(`${backendUrl}/recruiter/getJobDetail/${jobId}`, config)
         .then((res) => {
           this.jobs = res.data[0];
           const job = res.data[0]; 
@@ -226,7 +227,7 @@ export default {
       benefit : JSON.stringify(this.benefit),
       specification : JSON.stringify(this.specification)
     };
-    axios.put(`http://localhost:3000/recruiter/updateJob/${jobId}`, data, config)
+    axios.put(`${backendUrl}/recruiter/updateJob/${jobId}`, data, config)
       .then((res) => {
         Swal.fire({
           icon: 'success',

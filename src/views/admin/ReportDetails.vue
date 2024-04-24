@@ -62,15 +62,10 @@
                 <input type="radio" id="reject" value="reject" v-model="selectedAction">
                 <label for="reject">Reject Case</label>
               </div>
-              <button class="button is-success is-small mt-2 mr-2" @click="confirmAction">ยืนยัน</button>
-            
-            </div>
-            
-            
+              <button class="button is-success is-small mt-2 mr-2" @click="confirmAction">ยืนยัน</button>     
+            </div>  
           </div>
-            
           </div>
-
       </div>
       </div>
     </div>
@@ -80,6 +75,7 @@
 import axios from 'axios';
 import sideMenu from '@/components/admin/side-menu.vue';
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
     components:{
         sideMenu
@@ -157,7 +153,7 @@ export default {
   methods: {
     fetcReportDetails() {
       const reportId = this.$route.params.id;
-      axios.get(`http://localhost:3000/admin/ReportDetail/${reportId}`)
+      axios.get(`${backendUrl}/admin/ReportDetail/${reportId}`)
         .then(response => {
           this.report = response.data;
         })
@@ -167,7 +163,7 @@ export default {
     },
     fetchStudentJob() {
       const reportId = this.$route.params.id;
-      axios.get(`http://localhost:3000/admin/reportApplications/${reportId}`)
+      axios.get(`${backendUrl}/admin/reportApplications/${reportId}`)
         .then(response => {
           this.applications = response.data;
         })
@@ -200,7 +196,7 @@ export default {
         });
 
         if (result.isConfirmed) {
-            axios.put(`http://localhost:3000/admin/closeCompany`, { companyId , reportId})
+            axios.put(`${backendUrl}/admin/closeCompany`, { companyId , reportId})
                 .then(response => {
                     Swal.fire('Banned!', 'The company has been banned.', 'success');
                     console.log(response);
@@ -225,7 +221,7 @@ export default {
         });
 
         if (result.isConfirmed) {
-            axios.put(`http://localhost:3000/admin/rejectReport`, { reportId })
+            axios.put(`${backendUrl}/admin/rejectReport`, { reportId })
                 .then(response => {
                     Swal.fire('Rejected!', 'The case has been rejected.', 'success');
                     console.log(response);
@@ -263,7 +259,7 @@ export default {
 },
   imagePath(companyProfileImage) {
     if (companyProfileImage) {
-      return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+      return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
     } else {
       return "https://bulma.io/images/placeholders/640x360.png";
     }

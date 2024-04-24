@@ -101,7 +101,7 @@
               <article class="download-instructions">
                 <h2>1.ดาวน์โหลดแบบตอบรับและเสนองานนักศึกษาสหกิจศึกษา</h2>
                   <div class="file has-name">
-                  <label class="file-label" @click="downloadFile('http://localhost:3000/coop302/coop302.pdf')">               
+                  <label class="file-label" @click="downloadFile('${backendUrl}/coop302/coop302.pdf')">               
                     <span class="file-cta">
                       <span class="file-icon">
                         <i class="fa-sharp fa-solid fa-download"></i>
@@ -152,7 +152,7 @@
 <script>
 import axios from "@/plugins/axios";
 import Swal from "sweetalert2";
-
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   
   data() {
@@ -185,7 +185,7 @@ export default {
         },
       };
       axios
-        .get("http://localhost:3000/application/getApplications", config)
+        .get(`${backendUrl}/application/getApplications`, config)
         .then((response) => {
           this.applicationss = response.data;
           this.isLoading = false;
@@ -204,7 +204,7 @@ export default {
         },
       };
       axios
-        .get(`http://localhost:3000/application/getApplication/${applicationId}`, config)
+        .get(`${backendUrl}/application/getApplication/${applicationId}`, config)
         .then((response) => {
           this.applications = response.data[0];      
         })
@@ -220,7 +220,7 @@ export default {
         },
       };
       axios
-        .get(`http://localhost:3000/application/getApplicationByJob/${jobId}`, config)
+        .get(`${backendUrl}/application/getApplicationByJob/${jobId}`, config)
         .then((response) => {
           this.applicationsByJob = response.data;
           this.jobName = response.data[0].job_title
@@ -237,7 +237,7 @@ export default {
         },
       };
       axios
-        .get(`http://localhost:3000/application/getApplicationDetails/${applicationId}`, config)
+        .get(`${backendUrl}/application/getApplicationDetails/${applicationId}`, config)
         .then((response) => {
           this.applicationJob = response.data[0];
           this.applicationUserId = applicationId;
@@ -248,7 +248,7 @@ export default {
     },
     imagePath(resume) {
       if (resume) {
-          return "http://localhost:3000/" + resume.replace(/\\/g, '/').replace('static', '');
+          return `${backendUrl}/` + resume.replace(/\\/g, '/').replace('static', '');
       } else {
           return "https://bulma.io/images/placeholders/640x360.png";
       }
@@ -286,7 +286,7 @@ export default {
   formData.append('application_status', 'approve');
 
   axios.put(
-    `http://localhost:3000/application/acceptApplicant/${applicationJob}`,
+    `${backendUrl}/application/acceptApplicant/${applicationJob}`,
     formData,
     config
   )
@@ -337,7 +337,7 @@ declineApplicant(applicationJob) {
       const application_status = "declined";
 
       axios.put(
-        `http://localhost:3000/application/declineApplicant/${applicationJob}`,
+        `${backendUrl}/application/declineApplicant/${applicationJob}`,
         { application_status },
         config
       )

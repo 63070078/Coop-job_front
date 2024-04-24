@@ -74,6 +74,7 @@ import axios from "axios";
 import { minLength, sameAs  } from "vuelidate/lib/validators";
 import Swal from "sweetalert2";
 import recruiterSideMenu from '@/components/recruiter/recruiter-side-menu.vue';
+const backendUrl = "https://coop-job-back.onrender.com";
 function complexPassword(value) {
   if (!(value.match(/[a-z]/) && value.match(/[A-Z]/) && value.match(/[0-9]/))) {
     return false;
@@ -109,7 +110,7 @@ methods: {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get("http://localhost:3000/user/me", config).then((res) => {
+      axios.get(`${backendUrl}/user/me`, config).then((res) => {
         
         this.user = res.data;
         console.log("App.vue", this.user)
@@ -130,7 +131,7 @@ methods: {
     password: this.check_password_Email,
   };
   axios
-    .post('http://localhost:3000/user/changeEmail', data, config)
+    .post(`${backendUrl}/user/changeEmail`, data, config)
     .then((response) => {
       console.log('Email change successful:', response);
       Swal.fire({
@@ -210,7 +211,7 @@ methods: {
         };
 
         axios
-          .post('http://localhost:3000/user/changePassword', data, config)
+          .post(`${backendUrl}/user/changePassword`, data, config)
           .then((response) => {
             console.log('Password change successful:', response);
             Swal.fire({

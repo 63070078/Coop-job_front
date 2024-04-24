@@ -65,6 +65,7 @@
 import { required } from "vuelidate/lib/validators";
 import axios from 'axios';
 import Swal from "sweetalert2";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   data() {
     return {
@@ -99,7 +100,7 @@ export default {
       const uploadedFile = fileInput.files[0];
       formData.append('job_upload_file', uploadedFile);
       axios
-        .post("http://localhost:3000/recruiter/addJobByUpload",formData, config)
+        .post(`${backendUrl}/recruiter/addJobByUpload`,formData, config)
         .then((res) =>{
           const message = res.data.message;
             Swal.fire({

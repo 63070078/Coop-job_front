@@ -21,7 +21,8 @@ import UploadTranscript from '@/components/applicant/upload-transcript.vue';
 import UploadPortfolio from '@/components/applicant/upload-portfolio.vue';
 import applicantPreview from '@/components/applicant/applicant-preview.vue';
 import applicantSideMenu from '@/components/applicant/applicant-side-menu.vue';
-import axios from "@/plugins/axios";
+import axios from "axios";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components: {
     applicantProfile,
@@ -59,7 +60,7 @@ export default {
         },
       };
 
-      axios.get("http://localhost:3000/applicant/getData", config).then((res) => {
+      axios.get(`${backendUrl}/applicant/getData`, config).then((res) => {
         this.user = res.data;
         // console.log("appProfile", res.data[0].email)
         this.firstName = res.data[0].firstName;

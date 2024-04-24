@@ -159,6 +159,7 @@
 <script>
 import axios from "axios";
 import allCompany from "@/components/all-company.vue";
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   components:{
     allCompany
@@ -193,7 +194,7 @@ export default {
     
     getCompanyDetails(companyId) {
       axios
-        .get(`http://localhost:3000/recruiter/getRecruiterDetails/${companyId}`)
+        .get(`${backendUrl}/recruiter/getRecruiterDetails/${companyId}`)
         .then((response) => {
           this.company = response.data;
           this.company.profile_image = response.data.profile_image.replace(/\\/g, '/').replace('static', '');
@@ -206,7 +207,7 @@ export default {
 
     getCompanyReviews(companyId) {
       axios
-        .get(`http://localhost:3000/recruiter/getRecruiterReviews/${companyId}`)
+        .get(`${backendUrl}/recruiter/getRecruiterReviews/${companyId}`)
         .then((response) => {
           this.companyReviews = response.data;
     
@@ -218,7 +219,7 @@ export default {
     // ใน method getCompanyJobs
 getCompanyJobs(companyId) {
   axios
-    .get(`http://localhost:3000/recruiter/getCompanyJobs/${companyId}`)
+    .get(`${backendUrl}/recruiter/getCompanyJobs/${companyId}`)
     .then((response) => {
       this.jobs = response.data;
 
@@ -236,7 +237,7 @@ getCompanyJobs(companyId) {
 
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage;
+        return `${backendUrl}` + companyProfileImage;
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

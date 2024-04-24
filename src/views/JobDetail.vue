@@ -145,6 +145,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { required} from 'vuelidate/lib/validators';
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   data() {
     return {
@@ -198,7 +199,7 @@ export default {
           Authorization: `Bearer ${token}`,
         },
       };
-      axios.get("http://localhost:3000/user/me", config).then((res) => {
+      axios.get(`${backendUrl}/user/me`, config).then((res) => {
         this.user = res.data;
         //console.log("App.vue", this.user)
       });
@@ -206,7 +207,7 @@ export default {
     
     checkIfJobIsLiked(jobId) {
     const token = localStorage.getItem("token");
-    axios.get(`http://localhost:3000/application/checkJobLiked/${jobId}`, {
+    axios.get(`${backendUrl}/application/checkJobLiked/${jobId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
@@ -218,7 +219,7 @@ export default {
   },
 
     getCompanyJobDetail(jobId) {
-      axios.get(`http://localhost:3000/recruiter/getJobDetail/${jobId}`)
+      axios.get(`${backendUrl}/recruiter/getJobDetail/${jobId}`)
         .then((response) => {
           this.job = response.data[0];
           this.position_type = JSON.parse(this.job.position_type);
@@ -235,7 +236,7 @@ export default {
     getCompanyJobs(companyId) {
         console.log("companyId", companyId)
       axios
-        .get(`http://localhost:3000/recruiter/getAnotherJobs/${companyId}`)
+        .get(`${backendUrl}/recruiter/getAnotherJobs/${companyId}`)
         .then((response) => {
           this.jobs = response.data;
         })
@@ -272,7 +273,7 @@ export default {
       };
       console.log(`Applying to job ${jobId}`);
       axios
-        .post(`http://localhost:3000/application/sendApplicationJob`, data, config)
+        .post(`${backendUrl}/application/sendApplicationJob`, data, config)
         .then(res => {
           console.log(res.data.message)
           Swal.fire({
@@ -313,7 +314,7 @@ export default {
       };
 
       try {
-        const response = await axios.post('http://localhost:3000/application/submitReport', data, {
+        const response = await axios.post(`${backendUrl}/application/submitReport`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
         console.log(response.data.message);
@@ -332,7 +333,7 @@ export default {
     },
     favThisJob(jobId) {
       const token = localStorage.getItem("token");
-      axios.post(`http://localhost:3000/application/sendFavoriteJob/${jobId}`, {}, {
+      axios.post(`${backendUrl}/application/sendFavoriteJob/${jobId}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => {
@@ -345,7 +346,7 @@ export default {
     },
     unfavThisJob(jobId) {
       const token = localStorage.getItem("token");
-      axios.delete(`http://localhost:3000/application/cancelFavoriteJob/${jobId}`, {
+      axios.delete(`${backendUrl}/application/cancelFavoriteJob/${jobId}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(() => {
@@ -358,7 +359,7 @@ export default {
     },
     imagePath(companyProfileImage) {
       if (companyProfileImage) {
-        return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+        return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
       } else {
         return "https://bulma.io/images/placeholders/640x360.png";
       }

@@ -132,7 +132,7 @@
 
 <script>
 import axios from "axios";
-const backendUrl = "https://coop-job-back.onrender.com"
+const backendUrl = "https://coop-job-back.onrender.com";
 export default {
   data() {
     return {

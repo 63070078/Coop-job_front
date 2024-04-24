@@ -96,9 +96,10 @@
 </template>
   <script>
   import axios from "axios";
-  import jsonData from '@/assets/api_province_with_amphure_tambon.json'
-  import JobtypeJson from '@/assets/jobtype.json'
-  import Multiselect from 'vue-multiselect'
+  import jsonData from '@/assets/api_province_with_amphure_tambon.json';
+  import JobtypeJson from '@/assets/jobtype.json';
+  import Multiselect from 'vue-multiselect';
+  const backendUrl = "https://coop-job-back.onrender.com";
   export default {
     components: {
     Multiselect,
@@ -130,7 +131,7 @@
 
       getCompanies() {
         axios
-          .get("http://localhost:3000/recruiter/getRecruiter")
+          .get(`${backendUrl}/recruiter/getRecruiter`)
           .then((response) => {
             this.companies = response.data;
           })
@@ -148,7 +149,7 @@
       };
   
       axios
-        .get("http://localhost:3000/recruiter/getAllJobs", config)
+        .get(`${backendUrl}/recruiter/getAllJobs`, config)
         .then((res) => {
           // เพิ่มข้อมูลบริษัทลงในข้อมูลงาน
           this.jobs = res.data.map(job => {
@@ -165,9 +166,9 @@
       },
       imagePath(companyProfileImage) {
         if (companyProfileImage) {
-          return "http://localhost:3000" + companyProfileImage.replace(/\\/g, '/').replace('static', '');
+          return `${backendUrl}` + companyProfileImage.replace(/\\/g, '/').replace('static', '');
         } else {
-          return "https://bulma.io/images/placeholders/640x360.png";
+          return `https://bulma.io/images/placeholders/640x360.png`;
         }
       },
       loadLocationData() {

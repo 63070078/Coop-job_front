@@ -343,7 +343,7 @@ combineData() {
           'Content-Type': 'multipart/form-data',
         },
       };
-      axios.get('${backendUrl}/recruiter/getData', config).then((res) => {
+      axios.get(`${backendUrl}/recruiter/getData`, config).then((res) => {
         const user = res.data; 
         this.contact_person_name = user[0].contact_person_name;
         this.contact_phone_number = user[0].contact_phone_number;

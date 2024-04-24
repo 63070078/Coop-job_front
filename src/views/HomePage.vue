@@ -173,7 +173,7 @@ export default {
 methods: {
     getCompanies() {
       axios
-        .get("http://localhost:3000/recruiter/getRecruiter")
+        .get("https://coop-job-back.onrender.com/recruiter/getRecruiter")
         .then((response) => {
           this.companies = response.data;
         })
@@ -191,7 +191,7 @@ methods: {
     };
 
     axios
-      .get("http://localhost:3000/recruiter/getAllJobs", config)
+      .get("https://coop-job-back.onrender.com/recruiter/getAllJobs", config)
       .then((res) => {
         // เพิ่มข้อมูลบริษัทลงในข้อมูลงาน
         this.jobs = res.data.map(job => {

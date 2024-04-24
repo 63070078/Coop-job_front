@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import axios from "@/plugins/axios";
+import axios from "axios";
 import recruiterSideMenu from '@/components/recruiter/recruiter-side-menu.vue';
 const backendUrl = "https://coop-job-back.onrender.com";
 export default {
